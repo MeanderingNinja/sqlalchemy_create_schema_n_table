@@ -60,7 +60,7 @@ if not engine.dialect.has_table(conn, table_name):
 
 In this example, we check if the table named `users` already exists in the database using `has_table()`. If it does not exist, we can safely create it using `Base.metadata.create_all(engine)`.
 
-## 4. Create a session to interact with the database. Here's an example:
+## 5. Create a session to interact with the database. Here's an example:
 
 ```python
 from sqlalchemy.orm import sessionmaker
@@ -71,7 +71,7 @@ session = Session()
 
 In this example, we create a `Session` object using the `sessionmaker()` function and bind it to the engine object we created earlier. We then create a session object by calling `Session()`.
 
-## 5. Use the session to interact with the database. Here's an example:
+## 6. Use the session to interact with the database. Here's an example:
 
 ```python
 # create a new user
