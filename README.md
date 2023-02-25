@@ -89,3 +89,4 @@ In this example, we create a new `User` object with a username and password, add
 
 That's it! By following these steps, you can use a SQL query string and `create_all()` function along with data model to creat a schema and to create a table in a database respectively. Note that if you have made changes to the table schema (e.g., by adding or modifying columns), you will need to use a migration tool like Alembic to update the existing table schema instead of simply recreating the table.
 
+*Reminder for myself: The file path in my home server is cat_dev@cattechserver:~/Learning/learning_sqlalchemy/sqlalchemy_create_schema_n_table*
