@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, text
-from testing_models import Base, User, SCHEMA_NAME, TABLE_NAME
+from model import Base, User, SCHEMA_NAME, TABLE_NAME
 from sqlalchemy.orm import sessionmaker
 
 
@@ -38,9 +38,9 @@ def add_table_object_and_check(engine, object):
         users = session.query(User).all()
         for user in users:
             print(user.id, user.username, user.password)
-            
 
-engine = create_engine('postgresql://pa-test:pa-test@192.168.1.157:5432/pa-test') 
+
+engine = create_engine('postgresql://user:pw@host:port/db') 
 create_schema_if_not_exist(engine, SCHEMA_NAME)
 create_table_if_not_exist(engine, TABLE_NAME)
 
