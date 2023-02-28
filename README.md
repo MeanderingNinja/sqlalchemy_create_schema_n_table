@@ -70,7 +70,10 @@ from sqlalchemy import inspect
     else:
         print("The table is already in the database.")
 ```
-
+We can also use checkfirst option. Here's an example:
+```python
+Base.metadata.create_all(bind=engine, checkfirst=True)
+```
 ## 5. Create a session to interact with the database. Here's an example:
 
 ```python

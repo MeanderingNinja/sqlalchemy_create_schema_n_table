@@ -13,17 +13,23 @@ def create_schema_if_not_exist(engine, schema_name):
         print("Creating the schema...")
         create_schema_query = text(f'CREATE SCHEMA {schema_name};')
         engine.execute(create_schema_query)
-    else:        print(f"The schema {schema_name} already created!")
+    else:        
+        print(f"The schema {schema_name} already created!")
 
-def create_table_if_not_exist(engine, table_name):
+def create_table_if_not_exist(engine):
     # create a connection from the engine
-    conn = engine.connect()
-    if not engine.dialect.has_table(conn, TABLE_NAME):
-        # create the table if it doesn't exist
-        print("Creating users table")
-        Base.metadata.create_all(engine)
-    else:
-        print("Table already created!")
+    # conn = engine.connect()
+    # if not engine.dialect.has_table(conn, TABLE_NAME):
+    #     # create the table if it doesn't exist
+    #     print("Creating users table")
+    #     Base.metadata.create_all(engine)
+    # else:
+    #     print("Table already created!")
+    
+    # 20230227
+    # create the table if it doesn't exist
+    Base.metadata.create_all(bind=engine, checkfirst=True)
+   
 
 def add_table_object_and_check(engine, object):
 
@@ -39,9 +45,9 @@ def add_table_object_and_check(engine, object):
             print(user.id, user.username, user.password)
 
 
-engine = create_engine('postgresql://pa-test:pa-test@192.168.1.157:5432/pa-test') 
+engine = create_engine('postgresql://pa-test:pa-test@192.168.1.157:5432/pa-test', echo=True) 
 create_schema_if_not_exist(engine, SCHEMA_NAME)
-create_table_if_not_exist(engine, TABLE_NAME)
+create_table_if_not_exist(engine)
 
 # create a new user
 new_user = User(username='john_doe', password='secret')
