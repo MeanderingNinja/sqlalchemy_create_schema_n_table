@@ -13,8 +13,7 @@ def create_schema_if_not_exist(engine, schema_name):
         print("Creating the schema...")
         create_schema_query = text(f'CREATE SCHEMA {schema_name};')
         engine.execute(create_schema_query)
-    else:
-        print(f"The schema {schema_name} already created!")
+    else:        print(f"The schema {schema_name} already created!")
 
 def create_table_if_not_exist(engine, table_name):
     # create a connection from the engine
@@ -40,7 +39,7 @@ def add_table_object_and_check(engine, object):
             print(user.id, user.username, user.password)
 
 
-engine = create_engine('postgresql://user:pw@host:port/db') 
+engine = create_engine('postgresql://pa-test:pa-test@192.168.1.157:5432/pa-test') 
 create_schema_if_not_exist(engine, SCHEMA_NAME)
 create_table_if_not_exist(engine, TABLE_NAME)
 

@@ -53,12 +53,23 @@ from model import Base, User, SCHEMA_NAME, TABLE_NAME
 # create a connection from the engine
 conn = engine.connect()
 
-if not engine.dialect.has_table(conn, table_name):
+if not engine.dialect.has_table(conn, TABLE_NAME):
     # create the table if it doesn't exist
     Base.metadata.create_all(engine)
 ```
 
 In this example, we check if the table named `users` already exists in the database using `has_table()`. If it does not exist, we can safely create it using `Base.metadata.create_all(engine)`.
+We can also use `inspect` to check if the specified table already exists, Here's an example:
+```python
+from sqlalchemy import inspect
+
+    if not inspect(engine).has_table(TABLE_NAME):
+        # create the table if it doesn't exist
+        print("Creating the table in the database....")
+        Base.metadata.create_all(engine)
+    else:
+        print("The table is already in the database.")
+```
 
 ## 5. Create a session to interact with the database. Here's an example:
 
