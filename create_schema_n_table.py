@@ -1,20 +1,26 @@
 from sqlalchemy import create_engine, text
-from model import Base, User, SCHEMA_NAME, TABLE_NAME
+from model import Base, User, SCHEMA_NAME
 from sqlalchemy.orm import sessionmaker
 
 
 def create_schema_if_not_exist(engine, schema_name):
-    schema_exists_query = text(f"SELECT EXISTS(SELECT SCHEMA_NAME FROM information_schema.schemata WHERE SCHEMA_NAME = '{schema_name}')")
-    result = engine.execute(schema_exists_query).fetchone()
-    schema_exists = result[0]
+    # schema_exists_query = text(f"SELECT EXISTS(SELECT SCHEMA_NAME FROM information_schema.schemata WHERE SCHEMA_NAME = '{schema_name}')")
+    # result = engine.execute(schema_exists_query).fetchone()
+    # schema_exists = result[0]
 
-    # create schema if it doesn't exist
-    if not schema_exists:
-        print("Creating the schema...")
-        create_schema_query = text(f'CREATE SCHEMA {schema_name};')
-        engine.execute(create_schema_query)
-    else:        
-        print(f"The schema {schema_name} already created!")
+    # # create schema if it doesn't exist
+    # if not schema_exists:
+    #     print("Creating the schema...")
+    #     create_schema_query = text(f'CREATE SCHEMA {schema_name};')
+    #     engine.execute(create_schema_query)
+    # else:        
+    #     print(f"The schema {schema_name} already created!")
+
+    # 20230227
+    from sqlalchemy.schema import CreateSchema
+    with engine.connect() as conn:
+        if not conn.dialect.has_schema(conn, SCHEMA_NAME):
+            conn.execute(CreateSchema(SCHEMA_NAME))
 
 def create_table_if_not_exist(engine):
     # create a connection from the engine

@@ -44,7 +44,13 @@ if not schema_exists:
 else:
     print(f"The schema {schema_name} already created!")
 ```
-
+Another way to do this:
+```python
+from sqlalchemy.schema import CreateSchema
+    with engine.connect() as conn:
+        if not conn.dialect.has_schema(conn, SCHEMA_NAME):
+            conn.execute(CreateSchema(SCHEMA_NAME))
+```
 ## 4. Check if the table already exists. You can use the `has_table()` method of the engine's dialect object to check if the table already exists. Here's an example:
 
 ```python
